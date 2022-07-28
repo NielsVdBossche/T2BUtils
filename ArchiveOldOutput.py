@@ -12,9 +12,16 @@ target = "/pnfs/iihe/cms/store/user/nivanden/AnalysisOutput/TTTT/"
 days = 7
 def getTimestamp(filename):
     filenameSplit = filename.split("/")[-1]
+    date = ""
+    time = ""
     for part in filenameSplit.split('_'):
         if bool(re.match(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", part)):
-            return part
+            date = part
+        if bool(re.match(r"[0-9]{2}-[0-9]{2}", part)):
+            time = part
+            
+    return date+"_"+time
+
 
 if __name__ == "__main__":
     # list all files older than 7 days, take their timestamps and move them to old outputs in a folder named by their timestamp
